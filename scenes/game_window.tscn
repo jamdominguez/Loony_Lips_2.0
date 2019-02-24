@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/game_window.gd" type="Script" id=1]
 [ext_resource path="res://assets/blackboard_0.jpg" type="Texture" id=2]
 [ext_resource path="res://gfx/Feltpen.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/blue_button.png" type="Texture" id=4]
+[ext_resource path="res://assets/blue_button_pushed.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -11,13 +13,24 @@ outline_size = 2
 extra_spacing_char = 25
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=2]
+
+size = 60
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 60
+font_data = ExtResource( 3 )
+
 [node name="game_window" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="board" type="TextureRect" parent="."]
-margin_top = 3.99854
-margin_right = 1922.0
-margin_bottom = 1086.0
+margin_left = -1.948
+margin_top = 4.94657
+margin_right = 1920.05
+margin_bottom = 1086.95
 texture = ExtResource( 2 )
 expand = true
 
@@ -25,31 +38,26 @@ expand = true
 margin_left = 59.0
 margin_top = 42.0
 margin_right = 1864.0
-margin_bottom = 141.0
+margin_bottom = 162.0
 custom_fonts/normal_font = SubResource( 1 )
-text = "TELEFONO"
-
-[node name="char_input" type="LineEdit" parent="board"]
-margin_left = 113.0
-margin_top = 923.0
-margin_right = 187.0
-margin_bottom = 1027.0
-custom_fonts/font = SubResource( 1 )
-text = "A"
 
 [node name="word_input" type="LineEdit" parent="board"]
-margin_left = 535.0
-margin_top = 923.0
-margin_right = 1808.0
-margin_bottom = 1017.0
+margin_left = 739.052
+margin_top = 875.0
+margin_right = 1884.05
+margin_bottom = 995.0
+rect_min_size = Vector2( 0, 120 )
 custom_fonts/font = SubResource( 1 )
-text = "TELEGRAFO"
+placeholder_alpha = 0.1
 
 [node name="solve_button" type="TextureButton" parent="board"]
-margin_left = 340.343
-margin_top = 931.0
-margin_right = 470.343
-margin_bottom = 1016.0
+margin_left = 560.469
+margin_top = 875.0
+margin_right = 710.469
+margin_bottom = 995.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+expand = true
 
 [node name="chars_used" type="RichTextLabel" parent="board"]
 margin_left = 1279.39
@@ -57,5 +65,25 @@ margin_top = 249.798
 margin_right = 1821.39
 margin_bottom = 759.798
 custom_fonts/normal_font = SubResource( 1 )
-text = "A B C D E F G H I"
 
+[node name="char_input" type="LineEdit" parent="board"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -1858.54
+margin_top = 875.0
+margin_right = -1392.54
+margin_bottom = 995.0
+custom_fonts/font = SubResource( 2 )
+align = 1
+max_length = 1
+placeholder_text = "A"
+placeholder_alpha = 0.1
+
+[node name="solve_label" type="RichTextLabel" parent="board"]
+margin_left = 750.0
+margin_top = 875.0
+margin_right = 1262.0
+margin_bottom = 995.0
+custom_fonts/normal_font = SubResource( 3 )
+
+[connection signal="text_entered" from="board/char_input" to="." method="_on_char_input_text_entered"]
