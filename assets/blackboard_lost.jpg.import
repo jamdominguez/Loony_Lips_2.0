@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blackboard_end.jpg-5d39e6051bc0e41574d983510cb126e6.stex"
+path="res://.import/blackboard_lost.jpg-fa7d6891d68b379fe722f9af9445845a.stex"
 
 [deps]
 
-source_file="res://assets/blackboard_end.jpg"
-dest_files=[ "res://.import/blackboard_end.jpg-5d39e6051bc0e41574d983510cb126e6.stex" ]
+source_file="res://assets/blackboard_lost.jpg"
+dest_files=[ "res://.import/blackboard_lost.jpg-fa7d6891d68b379fe722f9af9445845a.stex" ]
 
 [params]
 

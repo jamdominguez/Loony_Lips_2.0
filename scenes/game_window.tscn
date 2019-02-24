@@ -42,19 +42,19 @@ margin_bottom = 162.0
 custom_fonts/normal_font = SubResource( 1 )
 
 [node name="word_input" type="LineEdit" parent="board"]
-margin_left = 739.052
-margin_top = 875.0
-margin_right = 1884.05
-margin_bottom = 995.0
+margin_left = 741.0
+margin_top = 918.744
+margin_right = 1886.0
+margin_bottom = 1038.74
 rect_min_size = Vector2( 0, 120 )
 custom_fonts/font = SubResource( 1 )
 placeholder_alpha = 0.1
 
 [node name="solve_button" type="TextureButton" parent="board"]
-margin_left = 560.469
-margin_top = 875.0
-margin_right = 710.469
-margin_bottom = 995.0
+margin_left = 562.417
+margin_top = 918.744
+margin_right = 712.417
+margin_bottom = 1038.74
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
 expand = true
@@ -69,21 +69,20 @@ custom_fonts/normal_font = SubResource( 1 )
 [node name="char_input" type="LineEdit" parent="board"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -1858.54
-margin_top = 875.0
-margin_right = -1392.54
-margin_bottom = 995.0
+margin_left = -1854.64
+margin_top = 918.744
+margin_right = -1388.64
+margin_bottom = 1038.74
 custom_fonts/font = SubResource( 2 )
 align = 1
 max_length = 1
 placeholder_alpha = 0.1
 
 [node name="solve_label" type="RichTextLabel" parent="board"]
-margin_left = 574.74
-margin_top = 898.584
-margin_right = 696.74
-margin_bottom = 969.584
+margin_left = 578.636
+margin_top = 942.328
+margin_right = 700.636
+margin_bottom = 1013.33
 custom_fonts/normal_font = SubResource( 3 )
-text = "Solve!"
 
 [connection signal="text_entered" from="board/char_input" to="." method="_on_char_input_text_entered"]
