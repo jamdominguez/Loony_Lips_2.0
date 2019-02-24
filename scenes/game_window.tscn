@@ -20,7 +20,7 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
 
-size = 60
+size = 40
 font_data = ExtResource( 3 )
 
 [node name="game_window" type="Node2D"]
@@ -76,14 +76,14 @@ margin_bottom = 995.0
 custom_fonts/font = SubResource( 2 )
 align = 1
 max_length = 1
-placeholder_text = "A"
 placeholder_alpha = 0.1
 
 [node name="solve_label" type="RichTextLabel" parent="board"]
-margin_left = 750.0
-margin_top = 875.0
-margin_right = 1262.0
-margin_bottom = 995.0
+margin_left = 574.74
+margin_top = 898.584
+margin_right = 696.74
+margin_bottom = 969.584
 custom_fonts/normal_font = SubResource( 3 )
+text = "Solve!"
 
 [connection signal="text_entered" from="board/char_input" to="." method="_on_char_input_text_entered"]
