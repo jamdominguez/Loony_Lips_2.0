@@ -1,7 +1,6 @@
 # TODOs
 # if player_has_won() -- Welcome scene
 # if player_has_lost() -- Lost scene
-# If type a wrong char by second or more time, no count the error and draw the char
 # Solve button functionality
 # Create a json file with the language strings and load it
 
@@ -92,10 +91,8 @@ func game_loop(char_entered):
 		show_chars_in_word_label(char_upper)
 		if player_has_won():
 			print(get_tree().reload_current_scene())
-	else:
-		fails += 1
-		show_wrong_char(char_upper)
-		change_board_texture(fails)
+	else:		
+		show_wrong_char(char_upper)		
 		if player_has_lost():
 			$board.texture = LOST_TEXTURE
 			disable_inputs()
@@ -112,8 +109,12 @@ func show_chars_in_word_label(char_entered):
 
 # Increase the fails counter and update the field in board
 func show_wrong_char(char_entered):
-	wrong_chars += char_entered
-	repaint_wrong_chars(wrong_chars)
+	var exist = wrong_chars.find(char_entered) != -1
+	if not exist:
+		fails += 1
+		wrong_chars += char_entered
+		repaint_wrong_chars(wrong_chars)
+		change_board_texture(fails)
 
 # Change board texture according fail counter
 func change_board_texture(fails):
