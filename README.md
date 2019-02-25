@@ -2,4 +2,4 @@
 ## Personal Upgrade Version 
 Loony Lips is a words game. It can build words until dead!
 
-### STATUS: IN DEVELOP
+### STATUS: COMPLETED
