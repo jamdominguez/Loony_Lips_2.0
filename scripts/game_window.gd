@@ -1,7 +1,6 @@
 # TODOs
 # if player_has_won() -- Welcome scene
 # if player_has_lost() -- Lost scene
-# Show all chars found into the word (no only one)
 # If type a wrong char by second or more time, no count the error and draw the char
 # Solve button functionality
 # Create a json file with the language strings and load it
@@ -37,7 +36,7 @@ func _ready():
 	words_library = get_words_collection("./data/words_spanish.json")
 	current_word = get_random_word(words_library)
 	secret_word = encryp_word(current_word)
-	update_secret_word_field(secret_word)	
+	repaint_secret_word_field(secret_word)	
 	wrong_chars = ""
 	fails = 0
 	pass
@@ -74,12 +73,12 @@ func encryp_word(current_word):
 	return secret_word
 
 # Update secret_word field with secret_word
-func update_secret_word_field(secret_word):
+func repaint_secret_word_field(secret_word):
 	$board/word_label.text = secret_word
 	pass
 
 # Update chars_used field with wrong_chars
-func update_wrong_chars(wrong_chars):
+func repaint_wrong_chars(wrong_chars):
 	$board/chars_used.text = wrong_chars
 	pass
 
@@ -90,7 +89,7 @@ func game_loop(char_entered):
 	var char_index = current_word.find(char_upper)
 	var exist = char_index != -1
 	if exist:
-		show_chars_in_word_label(char_upper, char_index)
+		show_chars_in_word_label(char_upper)
 		if player_has_won():
 			print(get_tree().reload_current_scene())
 	else:
@@ -103,14 +102,18 @@ func game_loop(char_entered):
 	pass
 
 # Update the secret word and show it in the board
-func show_chars_in_word_label(char_entered, char_index):	
-	secret_word[char_index] = char_entered
-	update_secret_word_field(secret_word)
+func show_chars_in_word_label(char_entered):
+	var index = 0
+	for c in current_word:
+		if c == char_entered:
+			secret_word[index] = char_entered
+		index += 1
+	repaint_secret_word_field(secret_word)
 
 # Increase the fails counter and update the field in board
 func show_wrong_char(char_entered):
 	wrong_chars += char_entered
-	update_wrong_chars(wrong_chars)
+	repaint_wrong_chars(wrong_chars)
 
 # Change board texture according fail counter
 func change_board_texture(fails):
