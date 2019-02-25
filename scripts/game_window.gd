@@ -1,6 +1,3 @@
-# TODOs
-# Create a json file with the language strings and load it
-
 extends Node2D
 
 var words_library
@@ -8,6 +5,7 @@ var current_word
 var secret_word
 var wrong_chars
 var fails
+var strings
 const MAX_FAILS = 10
 const BOARD_TEXTURES = [
 	preload("res://assets//blackboard_0.jpg"),
@@ -28,8 +26,9 @@ const LOST_TEXTURE = preload("res://assets//blackboard_lost.jpg")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	strings = get_json("res://data/strings_english.json")
+	words_library = get_json("res://data/words_english.json")
 	init_edit_fields()
-	words_library = get_words_collection("res://data/words_spanish.json")
 	current_word = get_random_word(words_library)
 	secret_word = encryp_word(current_word)
 	repaint_secret_word_field(secret_word)	
@@ -40,13 +39,14 @@ func _ready():
 # Init scene fileds
 func init_edit_fields():
 	$board/word_label.clear()
-	$board/chars_used.clear()
-	$board/char_input.clear()	
-	$board/word_input.clear()	
+	$board/chars_used.clear()	
+	$board/char_input.clear()
+	$board/word_input.clear()
 	$board/restart_button.hide()
+	$board/solve_button.text = strings.solve_button
 
 # Return a JSON object from JSONfilePath
-func get_words_collection(JSONfilePath):
+func get_json(JSONfilePath):
 	var file = File.new()
 	var result = file.open(JSONfilePath, File.READ)
 	if result != 0:
@@ -128,10 +128,11 @@ func player_has_lost():
 func update_inputs():
 	$board/char_input.queue_free()
 	$board/word_input.queue_free()
-	$board/solve_button.queue_free()	
+	$board/solve_button.queue_free()
 	$board.texture = LOST_TEXTURE
-	$board/word_label.text = "The correct word is " + current_word
-	$board/chars_used.text = "Game Over"
+	$board/word_label.text = strings.end_game_message + current_word
+	$board/chars_used.text = strings.end_game_title
+	$board/restart_button.text = strings.restart_button
 	$board/restart_button.show()
 
 ###########################################################################
@@ -144,7 +145,7 @@ func _on_char_input_text_entered(char_entered):
 
 # Signal: button pressed behavior
 func _on_restart_button_pressed():
-	get_tree().reload_current_scene()
+	print(get_tree().reload_current_scene())
 	pass
 
 # Signal: button pressed behavior

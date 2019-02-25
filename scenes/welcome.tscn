@@ -25,14 +25,12 @@ margin_top = 182.0
 margin_right = 1520.0
 margin_bottom = 375.0
 custom_fonts/normal_font = SubResource( 1 )
-text = "Loony Lips 2.0"
 
 [node name="start_button" type="Button" parent="welcome_board"]
-margin_left = 654.923
-margin_top = 645.748
-margin_right = 1247.92
-margin_bottom = 835.748
+margin_left = 581.0
+margin_top = 646.0
+margin_right = 1322.0
+margin_bottom = 838.0
 custom_fonts/font = SubResource( 1 )
-text = "START"
 
 [connection signal="pressed" from="welcome_board/start_button" to="." method="_on_start_button_pressed"]

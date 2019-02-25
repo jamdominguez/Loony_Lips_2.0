@@ -1,0 +1,9 @@
+{
+"welcome_title" : "Loony Lips 2.0",
+"welcome_button" : "START",
+"solve_button" : "SOLVE",	
+"end_game_message" : "The correct word is ",
+"end_game_title" : "Game over",
+"restart_button" : "RESTART"
+}
+	

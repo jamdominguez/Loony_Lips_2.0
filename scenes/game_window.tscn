@@ -41,9 +41,9 @@ expand = true
 
 [node name="word_label" type="RichTextLabel" parent="board"]
 margin_left = 59.0
-margin_top = 42.0
+margin_top = 23.0
 margin_right = 1864.0
-margin_bottom = 162.0
+margin_bottom = 229.0
 custom_fonts/normal_font = SubResource( 1 )
 
 [node name="word_input" type="LineEdit" parent="board"]
@@ -61,7 +61,6 @@ margin_top = 918.744
 margin_right = 710.469
 margin_bottom = 1038.74
 custom_fonts/font = SubResource( 5 )
-text = "SOLVE"
 
 [node name="chars_used" type="RichTextLabel" parent="board"]
 margin_left = 1279.39
@@ -88,7 +87,6 @@ margin_top = 502.589
 margin_right = 1753.25
 margin_bottom = 639.589
 custom_fonts/font = SubResource( 4 )
-text = "RESTART"
 
 [connection signal="pressed" from="board/solve_button" to="." method="_on_solve_button_pressed"]
 [connection signal="text_entered" from="board/char_input" to="." method="_on_char_input_text_entered"]
