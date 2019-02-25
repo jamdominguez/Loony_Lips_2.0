@@ -1,7 +1,4 @@
 # TODOs
-# if player_has_won() -- Welcome scene
-# if player_has_lost() -- Lost scene
-# Solve button functionality
 # Create a json file with the language strings and load it
 
 extends Node2D
@@ -32,7 +29,7 @@ const LOST_TEXTURE = preload("res://assets//blackboard_lost.jpg")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_edit_fields()
-	words_library = get_words_collection("./data/words_spanish.json")
+	words_library = get_words_collection("res://data/words_spanish.json")
 	current_word = get_random_word(words_library)
 	secret_word = encryp_word(current_word)
 	repaint_secret_word_field(secret_word)	
@@ -44,9 +41,9 @@ func _ready():
 func init_edit_fields():
 	$board/word_label.clear()
 	$board/chars_used.clear()
-	$board/char_input.clear()
-	$board/word_input.clear()
-	$board/solve_label.text = "Solve!"
+	$board/char_input.clear()	
+	$board/word_input.clear()	
+	$board/restart_button.hide()
 
 # Return a JSON object from JSONfilePath
 func get_words_collection(JSONfilePath):
@@ -94,8 +91,7 @@ func game_loop(char_entered):
 	else:		
 		show_wrong_char(char_upper)		
 		if player_has_lost():
-			$board.texture = LOST_TEXTURE
-			disable_inputs()
+			update_inputs()
 	pass
 
 # Update the secret word and show it in the board
@@ -129,16 +125,33 @@ func player_has_lost():
 	return fails >= MAX_FAILS
 
 # Desible all inputs
-func disable_inputs():
+func update_inputs():
 	$board/char_input.queue_free()
 	$board/word_input.queue_free()
-	$board/solve_button.queue_free()
-	$board/solve_label.queue_free()
-	
+	$board/solve_button.queue_free()	
+	$board.texture = LOST_TEXTURE
+	$board/word_label.text = "The correct word is " + current_word
+	$board/chars_used.text = "Game Over"
+	$board/restart_button.show()
+
 ###########################################################################
 ###########################################################################
 ###########################################################################
 # Signal: char_input ENTERED behavior
 func _on_char_input_text_entered(char_entered):
 	game_loop(char_entered)
+	pass
+
+# Signal: button pressed behavior
+func _on_restart_button_pressed():
+	get_tree().reload_current_scene()
+	pass
+
+# Signal: button pressed behavior
+func _on_solve_button_pressed():	
+	secret_word = $board/word_input.text.to_upper()	
+	if player_has_won():
+		print(get_tree().reload_current_scene())
+	else:
+		update_inputs() 
 	pass

@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/game_window.gd" type="Script" id=1]
 [ext_resource path="res://assets/blackboard_0.jpg" type="Texture" id=2]
 [ext_resource path="res://gfx/Feltpen.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/blue_button.png" type="Texture" id=4]
-[ext_resource path="res://assets/blue_button_pushed.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -13,14 +11,21 @@ outline_size = 2
 extra_spacing_char = 25
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=5]
+
+size = 25
+font_data = ExtResource( 3 )
+
 [sub_resource type="DynamicFont" id=2]
 
 size = 60
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 
-size = 40
+size = 50
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 3 )
 
 [node name="game_window" type="Node2D"]
@@ -50,14 +55,13 @@ rect_min_size = Vector2( 0, 120 )
 custom_fonts/font = SubResource( 1 )
 placeholder_alpha = 0.1
 
-[node name="solve_button" type="TextureButton" parent="board"]
-margin_left = 562.417
+[node name="solve_button" type="Button" parent="board"]
+margin_left = 560.469
 margin_top = 918.744
-margin_right = 712.417
+margin_right = 710.469
 margin_bottom = 1038.74
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-expand = true
+custom_fonts/font = SubResource( 5 )
+text = "SOLVE"
 
 [node name="chars_used" type="RichTextLabel" parent="board"]
 margin_left = 1279.39
@@ -78,11 +82,14 @@ align = 1
 max_length = 1
 placeholder_alpha = 0.1
 
-[node name="solve_label" type="RichTextLabel" parent="board"]
-margin_left = 578.636
-margin_top = 942.328
-margin_right = 700.636
-margin_bottom = 1013.33
-custom_fonts/normal_font = SubResource( 3 )
+[node name="restart_button" type="Button" parent="board"]
+margin_left = 1377.25
+margin_top = 502.589
+margin_right = 1753.25
+margin_bottom = 639.589
+custom_fonts/font = SubResource( 4 )
+text = "RESTART"
 
+[connection signal="pressed" from="board/solve_button" to="." method="_on_solve_button_pressed"]
 [connection signal="text_entered" from="board/char_input" to="." method="_on_char_input_text_entered"]
+[connection signal="pressed" from="board/restart_button" to="." method="_on_restart_button_pressed"]
