@@ -39,9 +39,13 @@ func _ready():
 # Init scene fileds
 func init_edit_fields():
 	$board/word_label.clear()
-	$board/chars_used.clear()	
+	$board/chars_used.clear()
 	$board/char_input.clear()
+	$board/char_input.hint_tooltip = strings.enter_char_tooltip
+	$board/char_info_label.text = strings.enter_char_tooltip + ":"
 	$board/word_input.clear()
+	$board/word_input.hint_tooltip = strings.enter_word_tooltip
+	$board/word_info_label.text = strings.enter_word_tooltip + ":"
 	$board/restart_button.hide()
 	$board/solve_button.text = strings.solve_button
 
@@ -134,6 +138,8 @@ func update_inputs():
 	$board/chars_used.text = strings.end_game_title
 	$board/restart_button.text = strings.restart_button
 	$board/restart_button.show()
+	$board/char_info_label.queue_free()
+	$board/word_info_label.queue_free()
 
 ###########################################################################
 ###########################################################################
@@ -141,18 +147,19 @@ func update_inputs():
 # Signal: char_input ENTERED behavior
 func _on_char_input_text_entered(char_entered):
 	game_loop(char_entered)
-	pass
 
 # Signal: button pressed behavior
 func _on_restart_button_pressed():
 	print(get_tree().reload_current_scene())
-	pass
 
 # Signal: button pressed behavior
 func _on_solve_button_pressed():	
-	secret_word = $board/word_input.text.to_upper()	
+	secret_word = $board/word_input.text.to_upper()
 	if player_has_won():
 		print(get_tree().reload_current_scene())
 	else:
 		update_inputs() 
-	pass
+
+# Signal: word_input ENTERED behavior
+func _on_word_input_text_entered(new_text):
+	_on_solve_button_pressed()

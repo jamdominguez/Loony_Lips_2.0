@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/game_window.gd" type="Script" id=1]
 [ext_resource path="res://assets/blackboard_0.jpg" type="Texture" id=2]
@@ -11,12 +11,12 @@ outline_size = 2
 extra_spacing_char = 25
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=2]
 
 size = 25
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 
 size = 60
 font_data = ExtResource( 3 )
@@ -28,14 +28,24 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=5]
+
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+
+size = 30
+font_data = ExtResource( 3 )
+
 [node name="game_window" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="board" type="TextureRect" parent="."]
-margin_left = -1.948
-margin_top = 4.94657
-margin_right = 1920.05
-margin_bottom = 1086.95
+margin_left = 1.94812
+margin_top = 2.99857
+margin_right = 1923.95
+margin_bottom = 1085.0
 texture = ExtResource( 2 )
 expand = true
 
@@ -47,20 +57,21 @@ margin_bottom = 229.0
 custom_fonts/normal_font = SubResource( 1 )
 
 [node name="word_input" type="LineEdit" parent="board"]
-margin_left = 741.0
-margin_top = 918.744
-margin_right = 1886.0
-margin_bottom = 1038.74
+margin_left = 546.104
+margin_top = 936.532
+margin_right = 1633.1
+margin_bottom = 1056.53
 rect_min_size = Vector2( 0, 120 )
 custom_fonts/font = SubResource( 1 )
+align = 1
 placeholder_alpha = 0.1
 
 [node name="solve_button" type="Button" parent="board"]
-margin_left = 560.469
-margin_top = 918.744
-margin_right = 710.469
-margin_bottom = 1038.74
-custom_fonts/font = SubResource( 5 )
+margin_left = 1644.21
+margin_top = 934.584
+margin_right = 1844.21
+margin_bottom = 1054.58
+custom_fonts/font = SubResource( 2 )
 
 [node name="chars_used" type="RichTextLabel" parent="board"]
 margin_left = 1279.39
@@ -72,11 +83,11 @@ custom_fonts/normal_font = SubResource( 1 )
 [node name="char_input" type="LineEdit" parent="board"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -1854.64
-margin_top = 918.744
-margin_right = -1388.64
-margin_bottom = 1038.74
-custom_fonts/font = SubResource( 2 )
+margin_left = -1870.22
+margin_top = 936.276
+margin_right = -1404.22
+margin_bottom = 1056.27
+custom_fonts/font = SubResource( 3 )
 align = 1
 max_length = 1
 placeholder_alpha = 0.1
@@ -88,6 +99,21 @@ margin_right = 1753.25
 margin_bottom = 639.589
 custom_fonts/font = SubResource( 4 )
 
+[node name="char_info_label" type="RichTextLabel" parent="board"]
+margin_left = 54.26
+margin_top = 885.584
+margin_right = 503.26
+margin_bottom = 955.584
+custom_fonts/normal_font = SubResource( 5 )
+
+[node name="word_info_label" type="RichTextLabel" parent="board"]
+margin_left = 549.262
+margin_top = 885.584
+margin_right = 1189.26
+margin_bottom = 955.584
+custom_fonts/normal_font = SubResource( 6 )
+
+[connection signal="text_entered" from="board/word_input" to="." method="_on_word_input_text_entered"]
 [connection signal="pressed" from="board/solve_button" to="." method="_on_solve_button_pressed"]
 [connection signal="text_entered" from="board/char_input" to="." method="_on_char_input_text_entered"]
 [connection signal="pressed" from="board/restart_button" to="." method="_on_restart_button_pressed"]
