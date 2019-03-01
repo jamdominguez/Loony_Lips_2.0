@@ -41,10 +41,8 @@ func init_edit_fields():
 	$board/word_label.clear()
 	$board/chars_used.clear()
 	$board/char_input.clear()
-	$board/char_input.hint_tooltip = strings.enter_char_tooltip
 	$board/char_info_label.text = strings.enter_char_tooltip + ":"
 	$board/word_input.clear()
-	$board/word_input.hint_tooltip = strings.enter_word_tooltip
 	$board/word_info_label.text = strings.enter_word_tooltip + ":"
 	$board/restart_button.hide()
 	$board/solve_button.text = strings.solve_button
@@ -91,11 +89,11 @@ func game_loop(char_entered):
 	if exist:
 		show_chars_in_word_label(char_upper)
 		if player_has_won():
-			print(get_tree().reload_current_scene())
+			update_inputs(true)
 	else:		
 		show_wrong_char(char_upper)		
 		if player_has_lost():
-			update_inputs()
+			update_inputs(false)
 	pass
 
 # Update the secret word and show it in the board
@@ -129,17 +127,24 @@ func player_has_lost():
 	return fails >= MAX_FAILS
 
 # Desible all inputs
-func update_inputs():
+func update_inputs(win):
 	$board/char_input.queue_free()
 	$board/word_input.queue_free()
 	$board/solve_button.queue_free()
-	$board.texture = LOST_TEXTURE
-	$board/word_label.text = strings.end_game_message + current_word
-	$board/chars_used.text = strings.end_game_title
-	$board/restart_button.text = strings.restart_button
-	$board/restart_button.show()
 	$board/char_info_label.queue_free()
 	$board/word_info_label.queue_free()
+	if win :		
+		$board.texture = START_TEXTURE
+		$board/word_label.text = strings.end_game_message + current_word
+		$board/chars_used.text = strings.win_game_title
+		$board/restart_button.text = strings.restart_button
+		$board/restart_button.show()
+	else:		
+		$board.texture = LOST_TEXTURE
+		$board/word_label.text = strings.end_game_message + current_word
+		$board/chars_used.text = strings.end_game_title
+		$board/restart_button.text = strings.restart_button
+		$board/restart_button.show()
 
 ###########################################################################
 ###########################################################################
@@ -156,9 +161,9 @@ func _on_restart_button_pressed():
 func _on_solve_button_pressed():	
 	secret_word = $board/word_input.text.to_upper()
 	if player_has_won():
-		print(get_tree().reload_current_scene())
+		update_inputs(true)
 	else:
-		update_inputs() 
+		update_inputs(false) 
 
 # Signal: word_input ENTERED behavior
 func _on_word_input_text_entered(new_text):

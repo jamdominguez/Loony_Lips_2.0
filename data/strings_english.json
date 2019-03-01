@@ -4,6 +4,7 @@
 "solve_button" : "SOLVE",	
 "end_game_message" : "The correct word is ",
 "end_game_title" : "Game over",
+"win_game_title" : "You win!",
 "restart_button" : "RESTART",
 "enter_char_tooltip" : "Enter a char",
 "enter_word_tooltip" : "Enter a word"

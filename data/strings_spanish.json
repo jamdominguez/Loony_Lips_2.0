@@ -4,6 +4,7 @@
 "solve_button" : "RESUELVE",	
 "end_game_message" : "La palabra correcta es ",
 "end_game_title" : "Fin de Juego",
+"win_game_title" : "¡Ganaste!",
 "restart_button" : "Reintentar",
 "enter_char_tooltip" : "Introduce un caracter",
 "enter_word_tooltip" : "Introduce una palabra"
