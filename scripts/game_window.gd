@@ -126,7 +126,7 @@ func player_has_won():
 func player_has_lost():
 	return fails >= MAX_FAILS
 
-# Desible all inputs
+# Update inputs visibility and labels according "win" is true or false
 func update_inputs(win):
 	$board/char_input.queue_free()
 	$board/word_input.queue_free()
