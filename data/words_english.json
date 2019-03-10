@@ -10,5 +10,9 @@
 	{"word" : "ANTENNA"},
 	{"word" : "SCHOOL"},
 	{"word" : "DINOSAUR"},
-	{"word" : "FRIEND"}
+	{"word" : "FRIEND"},
+	{"word" : "ENEMY"},
+	{"word" : "GLASS"},
+	{"word" : "SKY"},
+	{"word" : "SUN"}
 ]

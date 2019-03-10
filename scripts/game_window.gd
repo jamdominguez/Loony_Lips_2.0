@@ -5,7 +5,7 @@ var current_word
 var secret_word
 var wrong_chars
 var fails
-var strings
+
 const MAX_FAILS = 10
 const BOARD_TEXTURES = [
 	preload("res://assets//blackboard_0.jpg"),
@@ -23,13 +23,10 @@ const BOARD_TEXTURES = [
 const START_TEXTURE = preload("res://assets//blackboard.jpg")
 const LOST_TEXTURE = preload("res://assets//blackboard_lost.jpg")
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	strings = get_json("res://data/strings_english.json")
-	words_library = get_json("res://data/words_english.json")
 	init_edit_fields()
-	current_word = get_random_word(words_library)
+	current_word = get_random_word(global.words_library)
 	secret_word = encryp_word(current_word)
 	repaint_secret_word_field(secret_word)	
 	wrong_chars = ""
@@ -41,21 +38,11 @@ func init_edit_fields():
 	$board/word_label.clear()
 	$board/chars_used.clear()
 	$board/char_input.clear()
-	$board/char_info_label.text = strings.enter_char_tooltip + ":"
+	$board/char_info_label.text = global.strings.enter_char_tooltip + ":"
 	$board/word_input.clear()
-	$board/word_info_label.text = strings.enter_word_tooltip + ":"
+	$board/word_info_label.text = global.strings.enter_word_tooltip + ":"
 	$board/restart_button.hide()
-	$board/solve_button.text = strings.solve_button
-
-# Return a JSON object from JSONfilePath
-func get_json(JSONfilePath):
-	var file = File.new()
-	var result = file.open(JSONfilePath, File.READ)
-	if result != 0:
-		print("ERROR opening: "+JSONfilePath)
-	var text = file.get_as_text()#[{"word":"car"},{"word":"dog"}...]	
-	file.close()	
-	return parse_json(text)
+	$board/solve_button.text = global.strings.solve_button
 
 # Return a random word from the dictionary collection words_library
 func get_random_word(words_library):
@@ -135,15 +122,15 @@ func update_inputs(win):
 	$board/word_info_label.queue_free()
 	if win :		
 		$board.texture = START_TEXTURE
-		$board/word_label.text = strings.end_game_message + current_word
-		$board/chars_used.text = strings.win_game_title
-		$board/restart_button.text = strings.restart_button
+		$board/word_label.text = global.strings.end_game_message + current_word
+		$board/chars_used.text = global.strings.win_game_title
+		$board/restart_button.text = global.strings.restart_button
 		$board/restart_button.show()
 	else:		
 		$board.texture = LOST_TEXTURE
-		$board/word_label.text = strings.end_game_message + current_word
-		$board/chars_used.text = strings.end_game_title
-		$board/restart_button.text = strings.restart_button
+		$board/word_label.text = global.strings.end_game_message + current_word
+		$board/chars_used.text = global.strings.end_game_title
+		$board/restart_button.text = global.strings.restart_button
 		$board/restart_button.show()
 
 ###########################################################################
@@ -158,13 +145,13 @@ func _on_restart_button_pressed():
 	print(get_tree().reload_current_scene())
 
 # Signal: button pressed behavior
-func _on_solve_button_pressed():	
-	secret_word = $board/word_input.text.to_upper()
+func _on_solve_button_pressed():
+	_on_word_input_text_entered($board/word_input.text)
+
+# Signal: word_input ENTERED behavior
+func _on_word_input_text_entered(new_text):
+	secret_word = new_text.to_upper()
 	if player_has_won():
 		update_inputs(true)
 	else:
 		update_inputs(false) 
-
-# Signal: word_input ENTERED behavior
-func _on_word_input_text_entered(new_text):
-	_on_solve_button_pressed()

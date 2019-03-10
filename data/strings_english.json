@@ -7,6 +7,7 @@
 "win_game_title" : "You win!",
 "restart_button" : "RESTART",
 "enter_char_tooltip" : "Enter a char",
-"enter_word_tooltip" : "Enter a word"
+"enter_word_tooltip" : "Enter a word",
+"select_language_label" : "Select Language:"
 }
 	

@@ -1,24 +1,33 @@
 extends Node2D
 
-var strings
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	strings = get_json("res://data/strings_english.json")
-	$welcome_board/welcome_label.text = strings.welcome_title
-	$welcome_board/start_button.text = strings.welcome_button
+	_on_language_button_item_selected(0)
+	$welcome_board/language_button.add_item('Espanol', 0)
+	$welcome_board/language_button.add_item('English', 1)
 
-# Return a JSON object from JSONfilePath
-func get_json(JSONfilePath):
-	var file = File.new()
-	var result = file.open(JSONfilePath, File.READ)
-	if result != 0:
-		print("ERROR opening: "+JSONfilePath)
-	var text = file.get_as_text()#[{"word":"car"},{"word":"dog"}...]	
-	file.close()	
-	return parse_json(text)
+func refresh_lables():
+	$welcome_board/welcome_label.text = global.strings.welcome_title
+	$welcome_board/start_button.text = global.strings.welcome_button
+	$welcome_board/language_label.text = global.strings.select_language_label
 
+###########################################################################
+###########################################################################
+###########################################################################
 # Signal: button pressed behavior
 func _on_start_button_pressed():
-	print("pressed")	
-	print(get_tree().change_scene("res://scenes/game_window.tscn"))
+	var scene_path = "res://scenes/game_window.tscn"
+	var result = get_tree().change_scene(scene_path)
+	if result != 0:
+		print("ERROR opening scene: " + scene_path)
+
+# Signal: language button pressed behavior
+func _on_language_button_item_selected(ID):
+	print(String(ID))
+	if ID == 0:
+		global.strings = global.get_json("res://data/strings_spanish.json")
+		global.words_library = global.get_json("res://data/words_spanish.json")
+	elif ID == 1:
+		global.strings = global.get_json("res://data/strings_english.json")
+		global.words_library = global.get_json("res://data/words_english.json")
+	refresh_lables()

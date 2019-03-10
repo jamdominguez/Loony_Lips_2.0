@@ -10,5 +10,9 @@
 	{"word" : "ANTENA"},
 	{"word" : "COLEGIO"},
 	{"word" : "DINOSAURIO"},
-	{"word" : "AMIGO"}
+	{"word" : "AMIGO"},
+	{"word" : "ENEMIGO"},
+	{"word" : "VASO"},
+	{"word" : "CIELO"},
+	{"word" : "SOL"}
 ]

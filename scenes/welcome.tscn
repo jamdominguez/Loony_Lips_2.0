@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/welcome.gd" type="Script" id=1]
 [ext_resource path="res://assets/blackboard.jpg" type="Texture" id=2]
@@ -7,6 +7,16 @@
 [sub_resource type="DynamicFont" id=1]
 
 size = 120
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 30
 font_data = ExtResource( 3 )
 
 [node name="welcome" type="Node2D"]
@@ -20,17 +30,33 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="welcome_label" type="RichTextLabel" parent="welcome_board"]
-margin_left = 437.0
-margin_top = 182.0
-margin_right = 1520.0
-margin_bottom = 375.0
+margin_left = 420.0
+margin_top = 204.0
+margin_right = 1556.0
+margin_bottom = 397.0
 custom_fonts/normal_font = SubResource( 1 )
 
 [node name="start_button" type="Button" parent="welcome_board"]
-margin_left = 581.0
-margin_top = 646.0
-margin_right = 1322.0
-margin_bottom = 838.0
+margin_left = 590.567
+margin_top = 478.584
+margin_right = 1331.57
+margin_bottom = 670.584
 custom_fonts/font = SubResource( 1 )
 
+[node name="language_button" type="OptionButton" parent="welcome_board"]
+margin_left = 1052.0
+margin_top = 715.0
+margin_right = 1244.0
+margin_bottom = 775.0
+custom_fonts/font = SubResource( 2 )
+
+[node name="language_label" type="RichTextLabel" parent="welcome_board"]
+margin_left = 723.975
+margin_top = 714.825
+margin_right = 1030.97
+margin_bottom = 774.825
+custom_fonts/normal_font = SubResource( 3 )
+text = "Select language:"
+
 [connection signal="pressed" from="welcome_board/start_button" to="." method="_on_start_button_pressed"]
+[connection signal="item_selected" from="welcome_board/language_button" to="." method="_on_language_button_item_selected"]
