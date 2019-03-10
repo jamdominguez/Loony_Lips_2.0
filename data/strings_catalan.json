@@ -1,0 +1,13 @@
+{
+"welcome_title" : "Llavis Bojos 2.0",
+"welcome_button" : "COMENCA",
+"solve_button" : "RESOLDRA",	
+"end_game_message" : "La paraula correcta es ",
+"end_game_title" : "Fi de joc",
+"win_game_title" : "Tu guanyes!",
+"restart_button" : "RECOMENCA",
+"enter_char_tooltip" : "Introdui lletra",
+"enter_word_tooltip" : "Introdui una paraula",
+"select_language_label" : "Seleccio del llenguatge:"
+}
+	

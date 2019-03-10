@@ -6,7 +6,7 @@
 "end_game_title" : "Fin de Juego",
 "win_game_title" : "¡Ganaste!",
 "restart_button" : "Reintentar",
-"enter_char_tooltip" : "Introduce un caracter",
+"enter_char_tooltip" : "Introduce una letra",
 "enter_word_tooltip" : "Introduce una palabra",
 "select_language_label" : "Elige Idioma:"
 }

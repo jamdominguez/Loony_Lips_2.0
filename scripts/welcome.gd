@@ -5,6 +5,7 @@ func _ready():
 	_on_language_button_item_selected(0)
 	$welcome_board/language_button.add_item('Espanol', 0)
 	$welcome_board/language_button.add_item('English', 1)
+	$welcome_board/language_button.add_item('Catalan', 2)
 
 func refresh_labels():
 	$welcome_board/welcome_label.text = global.strings.welcome_title
@@ -22,11 +23,15 @@ func _on_start_button_pressed():
 		print("ERROR opening scene: " + scene_path)
 
 # Signal: language button pressed behavior
-func _on_language_button_item_selected(ID):	
-	if ID == 0:
-		global.strings = global.get_json("res://data/strings_spanish.json")
-		global.words_library = global.get_json("res://data/words_spanish.json")
-	elif ID == 1:
-		global.strings = global.get_json("res://data/strings_english.json")
-		global.words_library = global.get_json("res://data/words_english.json")
+func _on_language_button_item_selected(ID):
+	match ID:
+		0:
+			global.strings = global.get_json("res://data/strings_spanish.json")
+			global.words_library = global.get_json("res://data/words_spanish.json")
+		1:
+			global.strings = global.get_json("res://data/strings_english.json")
+			global.words_library = global.get_json("res://data/words_english.json")
+		2:
+			global.strings = global.get_json("res://data/strings_catalan.json")
+			global.words_library = global.get_json("res://data/words_catalan.json")
 	refresh_labels()
