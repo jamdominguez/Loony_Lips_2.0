@@ -5,17 +5,14 @@
 [ext_resource path="res://gfx/Feltpen.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-
 size = 120
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
-
 size = 30
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
-
 size = 30
 font_data = ExtResource( 3 )
 
@@ -57,6 +54,5 @@ margin_right = 1031.0
 margin_bottom = 777.0
 custom_fonts/normal_font = SubResource( 3 )
 text = "Select language:"
-
 [connection signal="pressed" from="welcome_board/start_button" to="." method="_on_start_button_pressed"]
 [connection signal="item_selected" from="welcome_board/language_button" to="." method="_on_language_button_item_selected"]
