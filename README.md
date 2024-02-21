@@ -3,5 +3,4 @@
 Loony Lips is a words game. It can build words until dead!
 
 **Needs GoDot 3.1**
-
-### STATUS: COMPLETED
+<br>**Status: Completed**<br>
